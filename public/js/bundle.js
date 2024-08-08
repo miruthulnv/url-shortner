@@ -6043,7 +6043,6 @@ exports.CanceledError = CanceledError;
 exports.AxiosError = AxiosError;
 exports.Axios = Axios;
 },{"./lib/axios.js":"../../node_modules/axios/lib/axios.js"}],"index.js":[function(require,module,exports) {
-var define;
 "use strict";
 
 var _axios = _interopRequireDefault(require("axios"));
@@ -6056,34 +6055,51 @@ console.log('Hello from front End');
 var form = document.querySelector('form');
 var textbox = document.querySelector('#urlInput');
 var displayOutput = document.querySelector('.display_output');
+var outputLink = document.querySelector('h2 > p');
 form.addEventListener('submit', /*#__PURE__*/function () {
-  var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(e) {
+  var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(e) {
     var res;
-    return _regeneratorRuntime().wrap(function _callee$(_context) {
-      while (1) switch (_context.prev = _context.next) {
+    return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+      while (1) switch (_context2.prev = _context2.next) {
         case 0:
           e.preventDefault();
           console.log("The url you entered is : ".concat(textbox.value));
-          _context.next = 4;
+          _context2.next = 4;
           return (0, _axios.default)({
             method: 'post',
-            url: "".concat("127.0.0.1:3000", "/api/v1/shorten"),
+            url: "/api/v1/shorten",
             data: {
               url: textbox.value
             }
           });
         case 4:
-          res = _context.sent;
+          res = _context2.sent;
+          console.log(res);
           if (res.data.status === 'success') {
-            displayOutput.innerHTML = res.data;
+            displayOutput.style.visibility = 'visible';
+            outputLink.innerHTML = "<a href=\"/s/".concat(res.data.string, "\">127.0.0.1/s/").concat(res.data.string, "</a>");
+            document.getElementById('copyButton').addEventListener('click', /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+              var textToCopy;
+              return _regeneratorRuntime().wrap(function _callee$(_context) {
+                while (1) switch (_context.prev = _context.next) {
+                  case 0:
+                    textToCopy = res.data.shortenedUrl;
+                    _context.next = 3;
+                    return navigator.clipboard.writeText(textToCopy);
+                  case 3:
+                  case "end":
+                    return _context.stop();
+                }
+              }, _callee);
+            })));
           } else {
             displayOutput.innerHTML = "The url is already shortened or something went wrong.. Check History and Try again";
           }
-        case 6:
+        case 7:
         case "end":
-          return _context.stop();
+          return _context2.stop();
       }
-    }, _callee);
+    }, _callee2);
   }));
   return function (_x) {
     return _ref.apply(this, arguments);

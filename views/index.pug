@@ -9,11 +9,12 @@ form
     label(for='urlInput') Enter your url:
     input#urlInput(type='text')
     input#submit-btn(type='submit' value='Shorten!!')
-h2.display_output
+h2.display_output(style="visibility: hidden")
     | Your URL is successfully shortened!!
     p
         a(href='127.0.0.1/s/asvnsd') 127.0.0.1/s/asvnsd
+    button#copyButton Copy
 footer
     a(href='/') Home
-    a(href='#' style='margin: 20px') History
+    a(href='/history' style='margin: 20px') History
 script(src='/js/bundle.js')

@@ -1,0 +1,22 @@
+doctype html
+head
+    meta(charset='UTF-8')
+    meta(name='viewport' content='width=device-width, initial-scale=1.0')
+    title Simple Table
+h1 All your Links
+table(border='1' cellpadding='5' cellspacing='0')
+    thead
+        tr
+            th
+                strong Original Link
+            th
+                strong Shortened Link
+    tbody
+        each link in links
+            tr
+                td= link.originalLink
+                td
+                    a(href=`/s/${link.string}`)= link.shortenedLink
+footer
+    a(href='/') Home
+    a(href='/history' style='margin: 20px') History

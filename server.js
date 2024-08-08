@@ -41,6 +41,10 @@ app.use('/home', (req, res)=>{
 
 app.post('/api/v1/shorten',urlController.shortenUrl)
 
+app.get('/s/:id',urlController.getUrl);
+
+app.get('/history',urlController.getAllUrl);
+
 app.use('*',(req,res)=>{
     res.status(404).json('404')
 });
